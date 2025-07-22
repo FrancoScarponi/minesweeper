@@ -4,7 +4,6 @@ function isValidName(name) {
   return name.length >= 3;
 }
 
-
 function countAdjacentMines(row, col, mines) {
   var count = 0;
 

@@ -14,7 +14,7 @@ function generateBoard(rows, cols, mines) {
 
       var key = i + "," + j;
       if (mines.includes(key)) {
-        cell.style.color = "red";
+        cell.innerHTML = '🖤'
       }
       board.appendChild(cell);
     }
