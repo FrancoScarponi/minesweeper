@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minesweeper</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="main-container">
+    <h1 class="title">Minesweeper</h1>
+
+    <section class="player-section">
+      <form id="player-form" class="player-form">
+        <label for="player-name">Name:</label>
+        <input type="text" id="player-name" name="player-name" />
+        <button type="submit">Start Game</button>
+      </form>
+    </section>
+
+    <section id="game-info" class="game-info hidden">
+      <div class="mine-counter">Mines: <span id="mines-left">10</span></div>
+      <div class="timer">Time: <span id="timer">0</span>s</div>
+      <button id="restart-button">Restart</button>
+    </section>
+
+    <section id="board" class="board hidden"></section>
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
