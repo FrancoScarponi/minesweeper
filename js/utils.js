@@ -14,7 +14,7 @@ function countAdjacentMines(row, col, mines) {
       var newRow = row + i;
       var newCol = col + j;
 
-      if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
+      if (newRow >= 0 && newRow < ROWS && newCol >= 0 && newCol < COLS) {
         var neighborKey = newRow + "," + newCol;
         if (mines.includes(neighborKey)) {
           count++;

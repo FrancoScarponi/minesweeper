@@ -4,9 +4,7 @@ function addCellEvents(mines) {
   var cells = document.getElementsByClassName("cell");
 
   for (var i = 0; i < cells.length; i++) {
-    var cell = cells[i];
-
-    cell.addEventListener("click", function () {
+    cells[i].addEventListener("click", function () {
       handleLeftClick(this, mines);
     });
   }
@@ -19,13 +17,13 @@ function handleLeftClick(cell, mines) {
 
   if (cell.classList.contains("cell-opened")) return;
 
-  cell.classList.add("cell-opened");
   cell.classList.remove("cell-closed");
+  cell.classList.add("cell-opened");
 
   if (mines.includes(key)) {
     cell.textContent = "💣";
     cell.style.backgroundColor = "red";
-    disabledBoard()
+    disabledBoard();
     alert("You hit a mine. Game over D:");
   } else {
     var count = countAdjacentMines(row, col, mines);
@@ -43,25 +41,29 @@ function handleLeftClick(cell, mines) {
 function chording(key, mines) {
   var row = parseInt(key.split(",")[0]);
   var col = parseInt(key.split(",")[1]);
+
   for (var dx = -1; dx <= 1; dx++) {
     for (var dy = -1; dy <= 1; dy++) {
-      if (dx == 0 && dy == 0) continue;
+      if (dx === 0 && dy === 0) continue;
 
-      var newRow = dx + row;
-      var newCol = dy + col;
+      var newRow = row + dx;
+      var newCol = col + dy;
       var newKey = newRow + "," + newCol;
 
-      if (newRow < 0 || newRow >= 8 || newCol < 0 || newCol >= 8) continue;
+      if (newRow < 0 || newRow >= ROWS || newCol < 0 || newCol >= COLS)
+        continue;
 
       var neighbor = document.querySelector(
         '[data-row="' + newRow + '"][data-col="' + newCol + '"]'
       );
-      if (!neighbor || neighbor.classList.contains("cell-opened")) continue;
 
-      if (!mines.includes(newKey)) {
-        neighbor.classList.remove("cell-closed");
-        neighbor.classList.add("cell-opened");
-      }
+      if (!neighbor || neighbor.classList.contains("cell-opened")) continue;
+      if (mines.includes(newKey)) continue;
+
+      neighbor.classList.remove("cell-closed");
+      neighbor.classList.add("cell-opened");
+      neighbor.style.pointerEvents = "none";
+
       var count = countAdjacentMines(newRow, newCol, mines);
 
       if (count === 0) {
@@ -78,7 +80,7 @@ function checkVictory(mines) {
   var opened = document.querySelectorAll(".cell-opened").length;
   var total = ROWS * COLS - mines.length;
   if (opened === total) {
-    disabledBoard()
+    disabledBoard();
     alert("You won! 🎉");
   }
 }

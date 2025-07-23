@@ -3,41 +3,40 @@
 var form = document.getElementById("player-form");
 var inputName = document.getElementById("player-name");
 var gameInfo = document.getElementById("game-info");
-var board = document.getElementById("board");
-var restart = document.getElementById("restart-button")
-
-var ROWS = 8;
-var COLS = 8;
-var CELL_SIZE = 40;
-var mines = [];
+var boardElement = document.getElementById("board");
+var restart = document.getElementById("restart-button");
+var difficultySelect = document.getElementById("difficulty");
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-
   var name = inputName.value.trim();
 
   if (isValidName(name)) {
-    startGame(name);
+    playerName = name;
+    startGame();
   } else {
     alert("Name must be at least 3 characters long.");
   }
 });
 
-restart.addEventListener("click", function (){
-  restartGame()
-})
+difficultySelect.addEventListener("change", function () {
+  startGame();
+});
 
-function startGame(name) {
+restart.addEventListener("click", function () {
+  startGame();
+});
+
+function startGame() {
+  var settings = getDifficultySettings();
+  ROWS = settings.rows;
+  COLS = settings.cols;
+
   form.classList.add("hidden");
   gameInfo.classList.remove("hidden");
-  board.classList.remove("hidden");
+  boardElement.classList.remove("hidden");
 
-  mines = generateMines(ROWS, COLS, 10);
+  mines = generateMines(ROWS, COLS, settings.mines);
   generateBoard(ROWS, COLS, mines);
   addCellEvents(mines);
 }
-
-function restartGame() {
-  startGame()
-}
-
