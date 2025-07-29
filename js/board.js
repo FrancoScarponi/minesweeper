@@ -12,11 +12,10 @@ function generateBoard(rows, cols, mines) {
       cell.dataset.row = i;
       cell.dataset.col = j;
 
-      // DEBUG:
-      // let key = i + "," + j;
-      // if (mines.includes(key)) {
-      //   cell.innerHTML = '🖤'; 
-      // }
+      let key = i + "," + j;
+      if (mines.includes(key)) {
+        cell.innerHTML = '🖤'; 
+      }
 
       board.appendChild(cell);
     }

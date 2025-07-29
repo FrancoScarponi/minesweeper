@@ -6,3 +6,4 @@ var CELL_SIZE = 40;
 var mines = [];
 var playerName = "";
 var minesLeft = 0;
+var totalMines = 0

@@ -1,44 +1,48 @@
 "use strict";
 
-function addCellEvents(mines) {
+function addCellEvents(mines, rows, cols) {
   var cells = document.getElementsByClassName("cell");
 
   for (var i = 0; i < cells.length; i++) {
-    cells[i].addEventListener("click", function () {
-      handleLeftClick(this, mines);
+    var cell = cells[i];
+
+    cell.addEventListener("click", function () {
+      const isOpened = this.classList.contains("cell-opened");
+      const isNumber = !isNaN(parseInt(this.textContent));
+
+      if (isOpened && isNumber) {
+        const row = parseInt(this.dataset.row);
+        const col = parseInt(this.dataset.col);
+        chording(row, col, mines, ROWS, COLS);
+        return;
+      }
+
+      handleLeftClick(this, mines, rows, cols);
+    });
+
+    cell.addEventListener("contextmenu", function (e) {
+      e.preventDefault(); 
+      handleRightClick(this);
     });
   }
 }
 
 function handleLeftClick(cell, mines) {
+  if (cell.textContent === "🚩") return;
+  
   var row = parseInt(cell.dataset.row);
   var col = parseInt(cell.dataset.col);
   var key = row + "," + col;
 
-  if (cell.classList.contains("cell-opened")) return;
-
-  cell.classList.remove("cell-closed");
-  cell.classList.add("cell-opened");
-
-  if (mines.includes(key)) {
-    cell.textContent = "💣";
-    cell.style.backgroundColor = "red";
-    disabledBoard();
-    alert("You hit a mine. Game over D:");
-  } else {
-    var count = countAdjacentMines(row, col, mines);
-    if (count === 0) {
-      cell.textContent = "";
-      chording(key, mines);
-    } else {
-      cell.textContent = count;
-    }
-    cell.style.pointerEvents = "none";
-    checkVictory(mines);
+  if (cell.classList.contains("cell-opened") && cell.textContent !== "") {
+    chording(row, col, mines, ROWS, COLS);
+    return;
   }
+
+  openCell(cell, row, col, mines);
 }
 
-function chording(key, mines) {
+function expandEmptyCells(key, mines) {
   var row = parseInt(key.split(",")[0]);
   var col = parseInt(key.split(",")[1]);
 
@@ -62,13 +66,12 @@ function chording(key, mines) {
 
       neighbor.classList.remove("cell-closed");
       neighbor.classList.add("cell-opened");
-      neighbor.style.pointerEvents = "none";
-
+      
       var count = countAdjacentMines(newRow, newCol, mines);
 
       if (count === 0) {
         neighbor.textContent = "";
-        chording(newKey, mines);
+        expandEmptyCells(newKey, mines);
       } else {
         neighbor.textContent = count;
       }
@@ -90,4 +93,18 @@ function disabledBoard() {
   for (var i = 0; i < cells.length; i++) {
     cells[i].style.pointerEvents = "none";
   }
+}
+
+function handleRightClick(cell) {
+  if (cell.classList.contains("cell-opened")) return;
+
+  if (cell.textContent === "🚩") {
+    cell.textContent = "";
+    cell.classList.remove("cell-flagged");
+  } else {
+    cell.textContent = "🚩";
+    cell.classList.add("cell-flagged");
+  }
+
+  updateMinesLeft();
 }

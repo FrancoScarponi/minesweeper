@@ -25,3 +25,109 @@ function countAdjacentMines(row, col, mines) {
 
   return count;
 }
+
+function updateMinesLeft() {
+  var allCells = document.getElementsByClassName("cell");
+  var flags = 0;
+
+  for (var i = 0; i < allCells.length; i++) {
+    if (allCells[i].textContent === "🚩") {
+      flags++;
+    }
+  }
+
+  var minesLeft = totalMines - flags;
+  document.getElementById("mines-left").textContent = minesLeft;
+}
+
+function getNeighbors(row, col) {
+  const neighbors = [];
+
+  for (let dx = -1; dx <= 1; dx++) {
+    for (let dy = -1; dy <= 1; dy++) {
+      if (dx === 0 && dy === 0) continue;
+      const r = row + dx;
+      const c = col + dy;
+      const selector = `[data-row="${r}"][data-col="${c}"]`;
+      const neighbor = document.querySelector(selector);
+      if (neighbor) neighbors.push(neighbor);
+    }
+  }
+
+  return neighbors;
+}
+
+function chording(row, col, mines, rows, cols) {
+  "use strict";
+
+  var cell = document.querySelector(
+    '[data-row="' + row + '"][data-col="' + col + '"]'
+  );
+  var number = parseInt(cell.textContent);
+
+  var flaggedCount = 0;
+  var neighbors = [];
+
+  for (var dx = -1; dx <= 1; dx++) {
+    for (var dy = -1; dy <= 1; dy++) {
+      if (dx === 0 && dy === 0) continue;
+
+      var newRow = row + dx;
+      var newCol = col + dy;
+
+      if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= cols)
+        continue;
+
+      var neighbor = document.querySelector(
+        '[data-row="' + newRow + '"][data-col="' + newCol + '"]'
+      );
+      if (!neighbor) continue;
+
+      if (neighbor.classList.contains("cell-flagged")) {
+        flaggedCount++;
+      } else if (!neighbor.classList.contains("cell-opened")) {
+        neighbors.push(neighbor);
+      }
+    }
+  }
+
+  if (flaggedCount === number) {
+    for (var i = 0; i < neighbors.length; i++) {
+      var n = neighbors[i];
+      var r = parseInt(n.dataset.row);
+      var c = parseInt(n.dataset.col);
+      openCell(n, r, c, mines); 
+    }
+  }
+}
+
+function openCell(cell, row, col, mines) {
+  "use strict";
+
+  var key = row + "," + col;
+
+  if (
+    cell.classList.contains("cell-opened") ||
+    cell.classList.contains("cell-flagged")
+  )
+    return;
+
+  cell.classList.remove("cell-closed");
+  cell.classList.add("cell-opened");
+
+  if (mines.includes(key)) {
+    cell.textContent = "💣";
+    cell.style.backgroundColor = "red";
+    disabledBoard();
+    alert("You hit a mine. Game over D:");
+  } else {
+    var count = countAdjacentMines(row, col, mines);
+    if (count === 0) {
+      cell.textContent = "";
+      expandEmptyCells(key, mines);
+    } else {
+      cell.textContent = count;
+    }
+    checkVictory(mines);
+  }
+}

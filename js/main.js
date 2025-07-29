@@ -31,7 +31,8 @@ function startGame() {
   var settings = getDifficultySettings();
   ROWS = settings.rows;
   COLS = settings.cols;
-
+  minesLeft = settings.mines;
+  totalMines = settings.mines;
   form.classList.add("hidden");
   gameInfo.classList.remove("hidden");
   boardElement.classList.remove("hidden");
