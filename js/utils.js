@@ -22,7 +22,6 @@ function countAdjacentMines(row, col, mines) {
       }
     }
   }
-
   return count;
 }
 
@@ -35,7 +34,6 @@ function updateMinesLeft() {
       flags++;
     }
   }
-
   var minesLeft = totalMines - flags;
   document.getElementById("mines-left").textContent = minesLeft;
 }
@@ -53,7 +51,6 @@ function getNeighbors(row, col) {
       if (neighbor) neighbors.push(neighbor);
     }
   }
-
   return neighbors;
 }
 
@@ -90,7 +87,6 @@ function chording(row, col, mines, rows, cols) {
       }
     }
   }
-
   if (flaggedCount === number) {
     for (var i = 0; i < neighbors.length; i++) {
       var n = neighbors[i];
@@ -109,8 +105,7 @@ function openCell(cell, row, col, mines) {
   if (
     cell.classList.contains("cell-opened") ||
     cell.classList.contains("cell-flagged")
-  )
-    return;
+  ) return;
 
   cell.classList.remove("cell-closed");
   cell.classList.add("cell-opened");
@@ -119,7 +114,7 @@ function openCell(cell, row, col, mines) {
     cell.textContent = "💣";
     cell.style.backgroundColor = "red";
     disabledBoard();
-    alert("You hit a mine. Game over D:");
+    showModal("You hit a mine. Game over D:")
   } else {
     var count = countAdjacentMines(row, col, mines);
     if (count === 0) {
@@ -131,3 +126,17 @@ function openCell(cell, row, col, mines) {
     checkVictory(mines);
   }
 }
+
+function showModal(message) {
+  var modal = document.getElementById("modal");
+  var modalMessage = document.getElementById("modal-message");
+  var modalClose = document.getElementById("modal-close");
+
+  modalMessage.textContent = message;
+  modal.classList.remove("hidden");
+
+  modalClose.onclick = function () {
+    modal.classList.add("hidden");
+  };
+}
+

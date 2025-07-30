@@ -84,7 +84,7 @@ function checkVictory(mines) {
   var total = ROWS * COLS - mines.length;
   if (opened === total) {
     disabledBoard();
-    alert("You won! 🎉");
+    showModal("You won! 🎉")
   }
 }
 

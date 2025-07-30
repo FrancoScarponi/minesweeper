@@ -12,7 +12,6 @@
 <body>
   <main class="main-container">
     <h1 class="title">Minesweeper</h1>
-
     <section class="player-section">
       <form id="player-form" class="player-form">
         <label for="player-name">Name:</label>
@@ -35,13 +34,20 @@
     </section>
 
     <section id="board" class="board hidden"></section>
+
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <p id="modal-message"></p>
+        <button id="modal-close">OK</button>
+      </div>
+    </div>
   </main>
 
-<script src="js/config.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/board.js"></script>
-<script src="js/events.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/main.js"></script>
 
 </body>
 
