@@ -1,9 +1,13 @@
 "use strict";
 
 function generateBoard(rows, cols, mines) {
+  currentRows = rows;
+  currentCols = cols;
+
   var board = document.getElementById("board");
   board.innerHTML = "";
-  board.style.width = cols * CELL_SIZE + "px";
+
+  adjustCellSize(rows, cols);
 
   for (var i = 0; i < rows; i++) {
     for (var j = 0; j < cols; j++) {
@@ -21,6 +25,25 @@ function generateBoard(rows, cols, mines) {
     }
   }
 }
+
+function adjustCellSize(rows, cols) {
+  const screenWidth = window.innerWidth;
+  const margin = 40; 
+  const availableSpace = screenWidth - (margin * 2); 
+  const cellSize = Math.floor(availableSpace / cols);
+  const finalSize = Math.max(16, Math.min(cellSize, 40));
+
+  document.documentElement.style.setProperty('--cell-size', `${finalSize}px`);
+
+  const boardSize = finalSize * cols;
+  const board = document.getElementById("board");
+  board.style.width = boardSize + "px";
+  board.style.height = boardSize + "px"; 
+}
+
+window.addEventListener("resize", () => {
+  adjustCellSize(currentRows, currentCols);
+});
 
 function generateMines(rows, cols, count) {
   var result = [];

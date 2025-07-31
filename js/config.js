@@ -10,3 +10,5 @@ var totalMines = 0
 var timerInterval = null;
 var timerStarted = false;
 
+let currentRows = 0;
+let currentCols = 0;
