@@ -112,3 +112,8 @@ function handleRightClick(cell) {
 
   updateMinesLeft();
 }
+
+
+document.getElementById("contact-button").addEventListener("click", () => {
+  window.location.href = "contact.html";
+});

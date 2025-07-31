@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/contact.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+  <button id="back-button" class="top-right-button">Back to Game</button>
+
+  <main class="main-container">
+    <h1 class="title">Contact Form</h1>
+
+    <form id="contact-form" class="player-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" />
+      <div id="nameError" class="error"></div>
+
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" />
+      <div id="emailError" class="error"></div>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="5"></textarea>
+      <div id="messageError" class="error"></div>
+
+      <button type="submit">Send</button>
+    </form>
+  </main>
+
+  <script src="js/contact.js"></script>
+</body>
+
+</html>

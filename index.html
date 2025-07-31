@@ -7,9 +7,12 @@
   <title>Minesweeper</title>
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 
 <body>
+  <button id="contact-button" class="top-right-button">Contacto</button>
   <main class="main-container">
     <h1 class="title">Minesweeper</h1>
     <section class="player-section" id="player-section">
@@ -19,7 +22,7 @@
         <button type="submit">Start Game</button>
       </form>
     </section>
-    
+
     <select id="difficulty" class="hidden">
       <option value="easy">Easy</option>
       <option value="medium">Medium</option>
@@ -34,7 +37,7 @@
         <button id="restart-button">😊</button>
         <div class="timer"><span id="timer">0</span></div>
       </section>
-  
+
       <section id="board" class="board hidden"></section>
     </div>
 
@@ -45,6 +48,12 @@
       </div>
     </div>
   </main>
+  
+  <footer class="footer">
+    <p>View the code on
+      <a href="https://github.com/FrancoScarponi/minesweeper" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </p>
+  </footer>
 
   <script src="js/config.js"></script>
   <script src="js/utils.js"></script>

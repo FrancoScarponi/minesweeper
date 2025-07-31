@@ -16,7 +16,7 @@ form.addEventListener("submit", function (event) {
     playerName = name;
     startGame();
   } else {
-    alert("Name must be at least 3 characters long.");
+    showModal("Name must be at least 3 characters long.");
   }
 });
 
