@@ -2,7 +2,7 @@
 
 var form = document.getElementById("player-form");
 var inputName = document.getElementById("player-name");
-var gameInfo = document.getElementById("game-info");
+var gameInfo = document.getElementById("game-panel");
 var boardElement = document.getElementById("board");
 var restart = document.getElementById("restart-button");
 var difficultySelect = document.getElementById("difficulty");

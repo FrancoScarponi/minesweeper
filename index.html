@@ -19,21 +19,24 @@
         <button type="submit">Start Game</button>
       </form>
     </section>
+    
+    <select id="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
 
-    <section id="game-info" class="game-info hidden">
-      <div class="mine-counter">Mines Left:
-        <span id="mines-left">10</span>
-        <select id="difficulty">
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-      </div>
-      <div class="timer">Time: <span id="timer">0</span>s</div>
-      <button id="restart-button">Restart</button>
-    </section>
-
-    <section id="board" class="board hidden"></section>
+    <div class="game-panel hidden" id="game-panel">
+      <section id="game-info" class="game-info">
+        <div class="mine-counter">Mines Left:
+          <span id="mines-left">10</span>
+        </div>
+        <button id="restart-button">😊</button>
+        <div class="timer">Time: <span id="timer">0</span>s</div>
+      </section>
+  
+      <section id="board" class="board hidden"></section>
+    </div>
 
     <div id="modal" class="modal hidden">
       <div class="modal-content">
