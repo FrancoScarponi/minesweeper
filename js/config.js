@@ -7,3 +7,6 @@ var mines = [];
 var playerName = "";
 var minesLeft = 0;
 var totalMines = 0
+var timerInterval = null;
+var timerStarted = false;
+

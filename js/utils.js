@@ -111,6 +111,7 @@ function openCell(cell, row, col, mines) {
   cell.classList.add("cell-opened");
 
   if (mines.includes(key)) {
+    stopTimer();
     cell.textContent = "💣";
     cell.style.backgroundColor = "red";
     disabledBoard();
@@ -138,5 +139,20 @@ function showModal(message) {
   modalClose.onclick = function () {
     modal.classList.add("hidden");
   };
+}
+
+function startTimer() {
+  var seconds = 0;
+  var timerDisplay = document.getElementById("timer");
+
+  timerInterval = setInterval(function () {
+    seconds++;
+    timerDisplay.textContent = seconds;
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+  timerStarted = false;
 }
 

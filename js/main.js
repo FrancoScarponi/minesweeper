@@ -1,6 +1,7 @@
 "use strict";
 
 var form = document.getElementById("player-form");
+var playerSection = document.getElementById("player-section");
 var inputName = document.getElementById("player-name");
 var gameInfo = document.getElementById("game-panel");
 var boardElement = document.getElementById("board");
@@ -24,6 +25,9 @@ difficultySelect.addEventListener("change", function () {
 });
 
 restart.addEventListener("click", function () {
+  stopTimer()
+  timerStarted = false
+  document.getElementById("timer").textContent = "0";
   startGame();
 });
 
@@ -33,10 +37,10 @@ function startGame() {
   COLS = settings.cols;
   minesLeft = settings.mines;
   totalMines = settings.mines;
-  form.classList.add("hidden");
+  playerSection.classList.add("hidden");
   gameInfo.classList.remove("hidden");
   boardElement.classList.remove("hidden");
-
+  difficultySelect.classList.remove("hidden");
   mines = generateMines(ROWS, COLS, settings.mines);
   generateBoard(ROWS, COLS, mines);
   addCellEvents(mines);

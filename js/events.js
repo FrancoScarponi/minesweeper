@@ -21,15 +21,18 @@ function addCellEvents(mines, rows, cols) {
     });
 
     cell.addEventListener("contextmenu", function (e) {
-      e.preventDefault(); 
+      e.preventDefault();
       handleRightClick(this);
     });
   }
 }
 
 function handleLeftClick(cell, mines) {
+  if (!timerStarted) {
+    startTimer();
+    timerStarted = true;
+  }
   if (cell.textContent === "🚩") return;
-  
   var row = parseInt(cell.dataset.row);
   var col = parseInt(cell.dataset.col);
   var key = row + "," + col;
@@ -66,7 +69,7 @@ function expandEmptyCells(key, mines) {
 
       neighbor.classList.remove("cell-closed");
       neighbor.classList.add("cell-opened");
-      
+
       var count = countAdjacentMines(newRow, newCol, mines);
 
       if (count === 0) {
@@ -83,8 +86,9 @@ function checkVictory(mines) {
   var opened = document.querySelectorAll(".cell-opened").length;
   var total = ROWS * COLS - mines.length;
   if (opened === total) {
+    stopTimer();
     disabledBoard();
-    showModal("You won! 🎉")
+    showModal("You won! 🎉");
   }
 }
 

@@ -12,7 +12,7 @@
 <body>
   <main class="main-container">
     <h1 class="title">Minesweeper</h1>
-    <section class="player-section">
+    <section class="player-section" id="player-section">
       <form id="player-form" class="player-form">
         <label for="player-name">Name:</label>
         <input type="text" id="player-name" name="player-name" />
@@ -20,7 +20,7 @@
       </form>
     </section>
     
-    <select id="difficulty">
+    <select id="difficulty" class="hidden">
       <option value="easy">Easy</option>
       <option value="medium">Medium</option>
       <option value="hard">Hard</option>
