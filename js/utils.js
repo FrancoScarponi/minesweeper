@@ -115,6 +115,7 @@ function openCell(cell, row, col, mines) {
     cell.textContent = "💣";
     cell.style.backgroundColor = "red";
     disabledBoard();
+    document.getElementById("lose-sound").play();
     showModal("You hit a mine. Game over D:")
   } else {
     var count = countAdjacentMines(row, col, mines);

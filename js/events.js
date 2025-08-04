@@ -88,6 +88,7 @@ function checkVictory(mines) {
   if (opened === total) {
     stopTimer();
     disabledBoard();
+    document.getElementById("win-sound").play();
     showModal("You won! 🎉");
   }
 }
