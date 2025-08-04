@@ -327,6 +327,23 @@ body {
   text-decoration: underline;
 }
 
+body.light-theme {
+  background-color: #f0f0f0;
+}
+
+body.light-theme .title, body.light-theme .footer  {
+  color: #000;
+}
+
+body.dark-theme{
+  background-color: #292929;
+}
+
+body.dark-theme .title, body.dark-theme .footer {
+  color: #dfdfdf;
+}
+
+
 @media (max-width: 600px) {
   body {
     justify-content: center; 

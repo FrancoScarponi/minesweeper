@@ -45,3 +45,24 @@ function startGame() {
   generateBoard(ROWS, COLS, mines);
   addCellEvents(mines);
 }
+
+
+function toggleTheme () {
+  var themeToggle = document.getElementById("theme-toggle");
+  if (!themeToggle) return;
+
+  var savedTheme = localStorage.getItem("theme") || "dark";
+  document.body.classList.add(savedTheme + "-theme");
+  themeToggle.textContent = savedTheme === "dark" ? "Light Mode" : "Dark Mode";
+
+  themeToggle.addEventListener("click", function () {
+    document.body.classList.toggle("dark-theme");
+    document.body.classList.toggle("light-theme");
+
+    var newTheme = document.body.classList.contains("dark-theme") ? "dark" : "light";
+    localStorage.setItem("theme", newTheme);
+    themeToggle.textContent = newTheme === "dark" ? "Light Mode" : "Dark Mode";
+  });
+};
+
+toggleTheme()
