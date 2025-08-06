@@ -4,7 +4,7 @@ function isValidName(name) {
   return name.length >= 3;
 }
 
-function countAdjacentMines(row, col, mines) {
+function countAdjacentMines(row, col) {
   var count = 0;
 
   for (var i = -1; i <= 1; i++) {
@@ -54,7 +54,7 @@ function getNeighbors(row, col) {
   return neighbors;
 }
 
-function chording(row, col, mines, rows, cols) {
+function chording(row, col, rows, cols) {
   "use strict";
 
   var cell = document.querySelector(
@@ -92,12 +92,49 @@ function chording(row, col, mines, rows, cols) {
       var n = neighbors[i];
       var r = parseInt(n.dataset.row);
       var c = parseInt(n.dataset.col);
-      openCell(n, r, c, mines); 
+      openCell(n, r, c); 
     }
   }
 }
 
-function openCell(cell, row, col, mines) {
+function expandEmptyCells(key, mines) {
+  var row = parseInt(key.split(",")[0]);
+  var col = parseInt(key.split(",")[1]);
+
+  for (var dx = -1; dx <= 1; dx++) {
+    for (var dy = -1; dy <= 1; dy++) {
+      if (dx === 0 && dy === 0) continue;
+
+      var newRow = row + dx;
+      var newCol = col + dy;
+      var newKey = newRow + "," + newCol;
+
+      if (newRow < 0 || newRow >= ROWS || newCol < 0 || newCol >= COLS)
+        continue;
+
+      var neighbor = document.querySelector(
+        '[data-row="' + newRow + '"][data-col="' + newCol + '"]'
+      );
+
+      if (!neighbor || neighbor.classList.contains("cell-opened")) continue;
+      if (mines.includes(newKey)) continue;
+
+      neighbor.classList.remove("cell-closed");
+      neighbor.classList.add("cell-opened");
+
+      var count = countAdjacentMines(newRow, newCol);
+
+      if (count === 0) {
+        neighbor.textContent = "";
+        expandEmptyCells(newKey, mines);
+      } else {
+        neighbor.textContent = count;
+      }
+    }
+  }
+}
+
+function openCell(cell, row, col) {
 
   var key = row + "," + col;
 
@@ -117,14 +154,14 @@ function openCell(cell, row, col, mines) {
     document.getElementById("lose-sound").play();
     showModal("You hit a mine. Game over D:")
   } else {
-    var count = countAdjacentMines(row, col, mines);
+    var count = countAdjacentMines(row, col);
     if (count === 0) {
       cell.textContent = "";
       expandEmptyCells(key, mines);
     } else {
       cell.textContent = count;
     }
-    checkVictory(mines);
+    checkVictory();
   }
 }
 
@@ -153,6 +190,7 @@ function startTimer() {
 function stopTimer() {
   clearInterval(timerInterval);
   timerStarted = false;
+  seconds = 0
 }
 
 function saveResult(name, duration) {

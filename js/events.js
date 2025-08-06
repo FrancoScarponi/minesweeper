@@ -13,11 +13,11 @@ function addCellEvents(mines, rows, cols) {
       if (isOpened && isNumber) {
         const row = parseInt(this.dataset.row);
         const col = parseInt(this.dataset.col);
-        chording(row, col, mines, ROWS, COLS);
+        chording(row, col, ROWS, COLS);
         return;
       }
 
-      handleLeftClick(this, mines, rows, cols);
+      handleLeftClick(this);
     });
 
     cell.addEventListener("contextmenu", function (e) {
@@ -27,7 +27,7 @@ function addCellEvents(mines, rows, cols) {
   }
 }
 
-function handleLeftClick(cell, mines) {
+function handleLeftClick(cell) {
   if (!timerStarted) {
     startTimer();
     timerStarted = true;
@@ -38,51 +38,14 @@ function handleLeftClick(cell, mines) {
   var key = row + "," + col;
 
   if (cell.classList.contains("cell-opened") && cell.textContent !== "") {
-    chording(row, col, mines, ROWS, COLS);
+    chording(row, col, ROWS, COLS);
     return;
   }
 
-  openCell(cell, row, col, mines);
+  openCell(cell, row, col);
 }
 
-function expandEmptyCells(key, mines) {
-  var row = parseInt(key.split(",")[0]);
-  var col = parseInt(key.split(",")[1]);
-
-  for (var dx = -1; dx <= 1; dx++) {
-    for (var dy = -1; dy <= 1; dy++) {
-      if (dx === 0 && dy === 0) continue;
-
-      var newRow = row + dx;
-      var newCol = col + dy;
-      var newKey = newRow + "," + newCol;
-
-      if (newRow < 0 || newRow >= ROWS || newCol < 0 || newCol >= COLS)
-        continue;
-
-      var neighbor = document.querySelector(
-        '[data-row="' + newRow + '"][data-col="' + newCol + '"]'
-      );
-
-      if (!neighbor || neighbor.classList.contains("cell-opened")) continue;
-      if (mines.includes(newKey)) continue;
-
-      neighbor.classList.remove("cell-closed");
-      neighbor.classList.add("cell-opened");
-
-      var count = countAdjacentMines(newRow, newCol, mines);
-
-      if (count === 0) {
-        neighbor.textContent = "";
-        expandEmptyCells(newKey, mines);
-      } else {
-        neighbor.textContent = count;
-      }
-    }
-  }
-}
-
-function checkVictory(mines) {
+function checkVictory() {
   var opened = document.querySelectorAll(".cell-opened").length;
   var total = ROWS * COLS - mines.length;
 
