@@ -98,7 +98,6 @@ function chording(row, col, mines, rows, cols) {
 }
 
 function openCell(cell, row, col, mines) {
-  "use strict";
 
   var key = row + "," + col;
 
@@ -143,7 +142,6 @@ function showModal(message) {
 }
 
 function startTimer() {
-  var seconds = 0;
   var timerDisplay = document.getElementById("timer");
 
   timerInterval = setInterval(function () {
@@ -155,5 +153,51 @@ function startTimer() {
 function stopTimer() {
   clearInterval(timerInterval);
   timerStarted = false;
+}
+
+function saveResult(name, duration) {
+  var games = JSON.parse(localStorage.getItem("minesweeper_ranking")) || [];
+
+  var now = new Date();
+  var datetime = now.getFullYear() + "-" +
+    String(now.getMonth() + 1).padStart(2, "0") + "-" +
+    String(now.getDate()).padStart(2, "0") + " " +
+    String(now.getHours()).padStart(2, "0") + ":" +
+    String(now.getMinutes()).padStart(2, "0");
+
+  games.push({
+    name: name,
+    duration: duration,
+    datetime: datetime
+  });
+  
+  games.sort(function (a, b) {
+    return parseTime(a.duration) - parseTime(b.duration);
+  });
+
+  localStorage.setItem("minesweeper_ranking", JSON.stringify(games));
+}
+
+function parseTime(t) {
+  var parts = t.split(":");
+  return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+}
+
+function showRanking() {
+  var games = JSON.parse(localStorage.getItem("minesweeper_ranking")) || [];
+  var tbody = document.querySelector("#ranking-table tbody");
+  tbody.innerHTML = "";
+
+  for (var i = 0; i < games.length; i++) {
+    var g = games[i];
+    var row = document.createElement("tr");
+    row.innerHTML =
+      "<td>" + g.name + "</td>" +
+      "<td>" + g.duration + "</td>" +
+      "<td>" + g.datetime + "</td>";
+    tbody.appendChild(row);
+  }
+
+  document.getElementById("ranking-modal").classList.remove("hidden");
 }
 

@@ -14,6 +14,8 @@
 <body>
   <button id="contact-button" class="top-right-button">Contacto</button>
   <button id="theme-toggle" class="top-right-button" style="top: 4rem;">Toggle Theme</button>
+  <button id="ranking-button" class="top-right-button" style="top: 7rem;">Ranking</button>
+
   <main class="main-container">
     <h1 class="title">Minesweeper</h1>
     <section class="player-section" id="player-section">
@@ -48,6 +50,24 @@
         <button id="modal-close">OK</button>
       </div>
     </div>
+
+    <div id="ranking-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Game Ranking</h2>
+        <table id="ranking-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Duration</th>
+              <th>Date & Time</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <button id="ranking-close">Close</button>
+      </div>
+    </div>
+
   </main>
   
   <footer class="footer">

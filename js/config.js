@@ -9,6 +9,7 @@ var minesLeft = 0;
 var totalMines = 0
 var timerInterval = null;
 var timerStarted = false;
+var seconds = 0;
 
 let currentRows = 0;
 let currentCols = 0;

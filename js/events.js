@@ -85,11 +85,20 @@ function expandEmptyCells(key, mines) {
 function checkVictory(mines) {
   var opened = document.querySelectorAll(".cell-opened").length;
   var total = ROWS * COLS - mines.length;
+
   if (opened === total) {
     stopTimer();
     disabledBoard();
-    document.getElementById("win-sound").play();
     showModal("You won! 🎉");
+
+    document.getElementById("win-sound").play();
+
+    var formattedTime =
+      String(Math.floor(seconds / 60)).padStart(2, "0") +
+      ":" +
+      String(seconds % 60).padStart(2, "0");
+    console.log(playerName,formattedTime)
+    saveResult(playerName, formattedTime);
   }
 }
 
@@ -114,7 +123,13 @@ function handleRightClick(cell) {
   updateMinesLeft();
 }
 
-
 document.getElementById("contact-button").addEventListener("click", () => {
   window.location.href = "contact.html";
+});
+
+document
+  .getElementById("ranking-button")
+  .addEventListener("click", showRanking);
+document.getElementById("ranking-close").addEventListener("click", function () {
+  document.getElementById("ranking-modal").classList.add("hidden");
 });
