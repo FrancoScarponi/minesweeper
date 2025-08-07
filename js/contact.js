@@ -15,7 +15,7 @@ document
     document.getElementById("emailError").textContent = "";
     document.getElementById("messageError").textContent = "";
 
-    let isValid = true;
+    var isValid = true;
 
     const nameRegex = /^[a-zA-Z0-9\s]+$/;
     if (!nameRegex.test(name) || name.length === 0) {

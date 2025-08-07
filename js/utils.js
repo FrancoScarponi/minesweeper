@@ -41,8 +41,8 @@ function updateMinesLeft() {
 function getNeighbors(row, col) {
   const neighbors = [];
 
-  for (let dx = -1; dx <= 1; dx++) {
-    for (let dy = -1; dy <= 1; dy++) {
+  for (var dx = -1; dx <= 1; dx++) {
+    for (var dy = -1; dy <= 1; dy++) {
       if (dx === 0 && dy === 0) continue;
       const r = row + dx;
       const c = col + dy;

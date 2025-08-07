@@ -1,0 +1,12 @@
+# node modules por si se añade alguna dependencia
+node_modules/
+
+# zips
+*.zip
+*.rar
+*.7z
+
+# variables de entorno si tuviera.....
+.env
+.env.local
+.env.*.local

@@ -11,5 +11,5 @@ var timerInterval = null;
 var timerStarted = false;
 var seconds = 0;
 
-let currentRows = 0;
-let currentCols = 0;
+var currentRows = 0;
+var currentCols = 0;
