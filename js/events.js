@@ -7,12 +7,12 @@ function addCellEvents(mines, rows, cols) {
     var cell = cells[i];
 
     cell.addEventListener("click", function () {
-      const isOpened = this.classList.contains("cell-opened");
-      const isNumber = !isNaN(parseInt(this.textContent));
+      var isOpened = this.classList.contains("cell-opened");
+      var isNumber = !isNaN(parseInt(this.textContent));
 
       if (isOpened && isNumber) {
-        const row = parseInt(this.dataset.row);
-        const col = parseInt(this.dataset.col);
+        var row = parseInt(this.dataset.row);
+        var col = parseInt(this.dataset.col);
         chording(row, col, ROWS, COLS);
         return;
       }

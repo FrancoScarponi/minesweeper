@@ -29,16 +29,16 @@ function generateBoard(rows, cols, mines) {
 }
 
 function adjustCellSize(rows, cols) {
-  const screenWidth = window.innerWidth;
-  const margin = 40; 
-  const availableSpace = screenWidth - (margin * 2); 
-  const cellSize = Math.floor(availableSpace / cols);
-  const finalSize = Math.max(16, Math.min(cellSize, 40));
+  var screenWidth = window.innerWidth;
+  var margin = 40; 
+  var availableSpace = screenWidth - (margin * 2); 
+  var cellSize = Math.floor(availableSpace / cols);
+  var finalSize = Math.max(16, Math.min(cellSize, 40));
 
   document.documentElement.style.setProperty('--cell-size', `${finalSize}px`);
 
-  const boardSize = finalSize * cols;
-  const board = document.getElementById("board");
+  var boardSize = finalSize * cols;
+  var board = document.getElementById("board");
   board.style.width = boardSize + "px";
   board.style.height = boardSize + "px"; 
 }

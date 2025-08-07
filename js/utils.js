@@ -39,15 +39,15 @@ function updateMinesLeft() {
 }
 
 function getNeighbors(row, col) {
-  const neighbors = [];
+  var neighbors = [];
 
   for (var dx = -1; dx <= 1; dx++) {
     for (var dy = -1; dy <= 1; dy++) {
       if (dx === 0 && dy === 0) continue;
-      const r = row + dx;
-      const c = col + dy;
-      const selector = `[data-row="${r}"][data-col="${c}"]`;
-      const neighbor = document.querySelector(selector);
+      var r = row + dx;
+      var c = col + dy;
+      var selector = `[data-row="${r}"][data-col="${c}"]`;
+      var neighbor = document.querySelector(selector);
       if (neighbor) neighbors.push(neighbor);
     }
   }
