@@ -18,10 +18,10 @@ function generateBoard(rows, cols, mines) {
 
       let key = i + "," + j;
       
-/*       if (mines.includes(key)) {
+      if (mines.includes(key)) {
         cell.innerHTML = '🖤'; 
         cell.style.color = "black"
-      } */
+      }
 
       board.appendChild(cell);
     }

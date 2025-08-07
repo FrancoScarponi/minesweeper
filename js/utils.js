@@ -180,7 +180,7 @@ function showModal(message) {
 
 function startTimer() {
   var timerDisplay = document.getElementById("timer");
-
+  seconds = 0
   timerInterval = setInterval(function () {
     seconds++;
     timerDisplay.textContent = seconds;
@@ -190,7 +190,6 @@ function startTimer() {
 function stopTimer() {
   clearInterval(timerInterval);
   timerStarted = false;
-  seconds = 0
 }
 
 function saveResult(name, duration) {
