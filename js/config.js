@@ -10,6 +10,6 @@ var totalMines = 0
 var timerInterval = null;
 var timerStarted = false;
 var seconds = 0;
-
+var currentSort = "duration"
 var currentRows = 0;
 var currentCols = 0;

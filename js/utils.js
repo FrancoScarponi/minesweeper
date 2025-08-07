@@ -165,6 +165,33 @@ function openCell(cell, row, col) {
   }
 }
 
+function checkVictory() {
+  var opened = document.querySelectorAll(".cell-opened").length;
+  var total = ROWS * COLS - mines.length;
+
+  if (opened === total) {
+    stopTimer();
+    disabledBoard();
+    showModal("You won! 🎉");
+
+    document.getElementById("win-sound").play();
+
+    var formattedTime =
+      String(Math.floor(seconds / 60)).padStart(2, "0") +
+      ":" +
+      String(seconds % 60).padStart(2, "0");
+    console.log(playerName,formattedTime)
+    saveResult(playerName, formattedTime);
+  }
+}
+
+function disabledBoard() {
+  var cells = document.getElementsByClassName("cell");
+  for (var i = 0; i < cells.length; i++) {
+    cells[i].style.pointerEvents = "none";
+  }
+}
+
 function showModal(message) {
   var modal = document.getElementById("modal");
   var modalMessage = document.getElementById("modal-message");
@@ -225,16 +252,24 @@ function showRanking() {
   var tbody = document.querySelector("#ranking-table tbody");
   tbody.innerHTML = "";
 
-  for (var i = 0; i < games.length; i++) {
-    var g = games[i];
-    var row = document.createElement("tr");
-    row.innerHTML =
-      "<td>" + g.name + "</td>" +
-      "<td>" + g.duration + "</td>" +
-      "<td>" + g.datetime + "</td>";
-    tbody.appendChild(row);
+  if (currentSort === "duration") {
+    games.sort((a, b) => parseTime(a.duration) - parseTime(b.duration));
+  } else if (currentSort === "date") {
+    games.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
   }
+
+  games.forEach((game, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${game.name}</td>
+      <td>${game.duration}</td>
+      <td>${game.datetime}</td>
+    `;
+    tbody.appendChild(row);
+  });
 
   document.getElementById("ranking-modal").classList.remove("hidden");
 }
+
 

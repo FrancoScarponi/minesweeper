@@ -45,33 +45,6 @@ function handleLeftClick(cell) {
   openCell(cell, row, col);
 }
 
-function checkVictory() {
-  var opened = document.querySelectorAll(".cell-opened").length;
-  var total = ROWS * COLS - mines.length;
-
-  if (opened === total) {
-    stopTimer();
-    disabledBoard();
-    showModal("You won! 🎉");
-
-    document.getElementById("win-sound").play();
-
-    var formattedTime =
-      String(Math.floor(seconds / 60)).padStart(2, "0") +
-      ":" +
-      String(seconds % 60).padStart(2, "0");
-    console.log(playerName,formattedTime)
-    saveResult(playerName, formattedTime);
-  }
-}
-
-function disabledBoard() {
-  var cells = document.getElementsByClassName("cell");
-  for (var i = 0; i < cells.length; i++) {
-    cells[i].style.pointerEvents = "none";
-  }
-}
-
 function handleRightClick(cell) {
   if (cell.classList.contains("cell-opened")) return;
 
@@ -96,3 +69,14 @@ document
 document.getElementById("ranking-close").addEventListener("click", function () {
   document.getElementById("ranking-modal").classList.add("hidden");
 });
+
+document.getElementById("sort-duration").addEventListener("click", function () {
+  currentSort = "duration";
+  showRanking();
+});
+
+document.getElementById("sort-date").addEventListener("click", function () {
+  currentSort = "date";
+  showRanking();
+});
+

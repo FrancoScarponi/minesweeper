@@ -405,6 +405,9 @@ body.light-theme #ranking-table th {
   background-color: #9a9a9a;
 }
 
+#sort-duration, #sort-date{
+  cursor: pointer;
+}
 
 @media (max-width: 600px) {
   body {
