@@ -7,9 +7,9 @@ document
   .addEventListener("submit", function (e) {
     e.preventDefault();
 
-    var name = document.getElementById("name").value.trim();
-    var email = document.getElementById("email").value.trim();
-    var message = document.getElementById("message").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
 
     document.getElementById("nameError").textContent = "";
     document.getElementById("emailError").textContent = "";
@@ -17,14 +17,14 @@ document
 
     var isValid = true;
 
-    var nameRegex = /^[a-zA-Z0-9\s]+$/;
+    const nameRegex = /^[a-zA-Z0-9\s]+$/;
     if (!nameRegex.test(name) || name.length === 0) {
       document.getElementById("nameError").textContent =
         "Name must be alphanumeric.";
       isValid = false;
     }
 
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       document.getElementById("emailError").textContent =
         "Please enter a valid email address.";
@@ -38,9 +38,9 @@ document
     }
 
     if (isValid) {
-      var subject = encodeURIComponent("Message from " + name);
-      var body = encodeURIComponent(message);
-      var mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
+      const subject = encodeURIComponent("Message from " + name);
+      const body = encodeURIComponent(message);
+      const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
       window.location.href = mailtoLink;
     }
   });
