@@ -2,90 +2,95 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Minesweeper</title>
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/style.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Minesweeper</title>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 
 <body>
-  <div class="button-container">
-    <button id="contact-button" class="top-right-button">Contacto</button>
-    <button id="theme-toggle" class="top-right-button" style="top: 4rem;">Toggle Theme</button>
-    <button id="ranking-button" class="top-right-button" style="top: 7rem;">Ranking</button>
-  </div>
+	<div class="button-container">
+		<button id="contact-button" class="top-right-button">Contacto</button>
+		<button id="theme-toggle" class="top-right-button" style="top: 4rem;">Toggle Theme</button>
+		<button id="ranking-button" class="top-right-button" style="top: 7rem;">Ranking</button>
+	</div>
 
-  <main class="main-container">
-    <h1 class="title">Minesweeper</h1>
-    <section class="player-section" id="player-section">
-      <form id="player-form" class="player-form">
-        <label for="player-name">Name:</label>
-        <input type="text" id="player-name" name="player-name" />
-        <button type="submit">Start Game</button>
-      </form>
-    </section>
+	<main class="main-container">
+		<h1 class="title">Minesweeper</h1>
+		<section class="player-section" id="player-section">
+			<form id="player-form" class="player-form">
+				<label for="player-name">Name:</label>
+				<input type="text" id="player-name" name="player-name" />
+				<input placeholder="Seed (blank=random)" type="text" id="seed-id" name="seed-id" />
+				<button type="submit">Start Game</button>
+			</form>
+		</section>
 
-    <select id="difficulty" class="hidden">
-      <option value="easy">Easy</option>
-      <option value="medium">Medium</option>
-      <option value="hard">Hard</option>
-    </select>
+		<img style="display: none;" id="easter-egg" src="/img/aprobado.jpg"/>
 
-    <div class="game-panel hidden" id="game-panel">
-      <section id="game-info" class="game-info">
-        <div class="mine-counter">
-          <span id="mines-left">10</span>
-        </div>
-        <button id="restart-button">😊</button>
-        <div class="timer"><span id="timer">0</span></div>
-      </section>
+		<select id="difficulty" class="hidden">
+			<option value="easy">Easy</option>
+			<option value="medium">Medium</option>
+			<option value="hard">Hard</option>
+		</select>
 
-      <section id="board" class="board hidden"></section>
-    </div>
+		<div class="game-panel hidden" id="game-panel">
+			<section id="game-info" class="game-info">
+				<div class="mine-counter">
+					<span id="mines-left">10</span>
+				</div>
+				<button id="restart-button">😊</button>
+				<div class="timer"><span id="timer">0</span></div>
+			</section>
 
-    <div id="modal" class="modal hidden">
-      <div class="modal-content">
-        <p id="modal-message"></p>
-        <button id="modal-close">OK</button>
-      </div>
-    </div>
+			<section id="board" class="board hidden"></section>
+		</div>
 
-    <div id="ranking-modal" class="modal hidden">
-      <div class="modal-content">
-        <h2>Game Ranking</h2>
-        <table id="ranking-table">
-          <thead>
-            <tr>
-              <th>Player</th>
-              <th>Duration</th>
-              <th>Date & Time</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <button id="ranking-close">Close</button>
-      </div>
-    </div>
+		<div id="modal" class="modal hidden">
+			<div class="modal-content">
+				<p id="modal-message"></p>
+				<button id="modal-close">OK</button>
+			</div>
+		</div>
 
-  </main>
-  
-  <footer class="footer">
-    <p>View the code on
-      <a href="https://github.com/FrancoScarponi/minesweeper" target="_blank" rel="noopener noreferrer">GitHub</a>
-    </p>
-  </footer>
+		<div id="ranking-modal" class="modal hidden">
+			<div class="modal-content">
+				<h2>Game Ranking</h2>
+				<table id="ranking-table">
+					<thead>
+						<tr>
+							<th>Player</th>
+							<th>Duration</th>
+							<th>Date & Time</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+				<button id="ranking-close">Close</button>
+			</div>
+		</div>
 
-  <audio id="win-sound" src="sounds/win.mp3" preload="auto"></audio>
-  <audio id="lose-sound" src="sounds/lose.mp3" preload="auto"></audio>
-  
-  <script src="js/config.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/board.js"></script>
-  <script src="js/events.js"></script>
-  <script src="js/main.js"></script>
+	</main>
+
+	<footer class="footer">
+		<p>View the code on
+			<a href="https://github.com/FrancoScarponi/minesweeper" target="_blank" rel="noopener noreferrer">GitHub</a>
+		</p>
+	</footer>
+
+	<span id="seed-show"></span>
+
+	<audio id="win-sound" src="sounds/win.mp3" preload="auto"></audio>
+	<audio id="lose-sound" src="sounds/lose.mp3" preload="auto"></audio>
+
+	<script src="js/config.js"></script>
+	<script src="js/utils.js"></script>
+	<script src="js/board.js"></script>
+	<script src="js/events.js"></script>
+	<script src="js/main.js"></script>
 
 </body>
 
